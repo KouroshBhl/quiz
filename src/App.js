@@ -7,6 +7,7 @@ import {
   Loader,
 } from './components';
 import GetQuestions from './components/GetQuestions';
+import FinishScreen from './components/FinishScreen';
 
 const initialState = {
   categories: [],
@@ -135,6 +136,9 @@ function reducer(state, action) {
     case 'nextQuestion':
       return { ...state, hasAnswered: false, index: state.index + 1 };
 
+    case 'quizFinished':
+      return { ...state, status: 'finished' };
+
     default:
       throw new Error(
         'Could not caught the action! Please contact administrator of the website!'
@@ -212,6 +216,13 @@ function App() {
           hasAnswered={hasAnswered}
           randomAnswers={randomAnswers[index]}
           allAnswers={allAnswers}
+          correctAnswers={correctAnswers}
+          incorrectAnswers={incorrectAnswers}
+        />
+      )}
+
+      {status === 'finished' && (
+        <FinishScreen
           correctAnswers={correctAnswers}
           incorrectAnswers={incorrectAnswers}
         />

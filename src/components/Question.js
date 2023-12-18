@@ -3,6 +3,7 @@ import SectionContainer from './SectionContainer';
 import NextButton from './NextButton';
 import QuestionFooter from './QuestionFooter';
 import Timer from './Timer';
+import Progress from './Progress';
 
 function Question({
   numOfQuestions,
@@ -14,10 +15,15 @@ function Question({
   incorrectAnswers,
   correctAnswers,
 }) {
+  console.log(numOfQuestions, index + 1);
   return (
     <div>
       <SectionContainer>
-        <progress className='progress' value={index} max={numOfQuestions} />
+        <Progress
+          index={index}
+          hasAnswered={hasAnswered}
+          numOfQuestions={numOfQuestions}
+        />
         <Options
           questionInfo={questions[index]}
           dispatch={dispatch}
@@ -32,8 +38,17 @@ function Question({
 
         <QuestionFooter>
           <Timer />
-          {hasAnswered && (
-            <NextButton onClick={() => dispatch({ type: 'nextQuestion' })} />
+          {hasAnswered && index + 1 < numOfQuestions && (
+            <NextButton
+              onClick={() => dispatch({ type: 'nextQuestion' })}
+              type={'NEXT'}
+            />
+          )}
+          {numOfQuestions === index + 1 && (
+            <NextButton
+              type={'FINISH'}
+              onClick={() => dispatch({ type: 'quizFinished' })}
+            />
           )}
         </QuestionFooter>
       </SectionContainer>

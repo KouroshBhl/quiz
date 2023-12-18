@@ -1,8 +1,8 @@
-function NextButton({ onClick }) {
+function NextButton({ onClick, type }) {
   return (
     <div className='wrapper' onClick={onClick}>
       <a className='cta' href='#'>
-        <span>NEXT</span>
+        <span>{type}</span>
         <span>
           <svg
             width='66px'
