@@ -27,7 +27,6 @@ function FinishMessage({ percentage }) {
     message =
       'Oh no! You did not answered any questions correctly! Study more...! 😢';
   }
-  console.log(message);
 
   return (
     <SectionContainer>

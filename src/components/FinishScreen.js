@@ -2,6 +2,7 @@ import SectionContainer from './SectionContainer';
 import CardQuestion from './CardQuestion';
 import Quote from './Quote';
 import FinishMessage from './FinishMessage';
+import RestartButton from './RestartButton';
 
 function FinishScreen({
   correctAnswers,
@@ -22,8 +23,8 @@ function FinishScreen({
               Correct answers{' '}
               <span className='percentage-message'>({percentage}%)</span>
             </h3>
-            {correctAnswers.map((question) => {
-              return <CardQuestion data={question} type={'true'} />;
+            {correctAnswers.map((question, id) => {
+              return <CardQuestion data={question} type={'true'} key={id} />;
             })}
           </div>
         )}
@@ -48,6 +49,7 @@ function FinishScreen({
             );
           })}
         </div>
+        <RestartButton onClick={() => dispatch({ type: 'resetQuiz' })} />
       </SectionContainer>
     </div>
   );

@@ -8,6 +8,7 @@ import {
 } from './components';
 import GetQuestions from './components/GetQuestions';
 import FinishScreen from './components/FinishScreen';
+import GetCategories from './components/GetCategories';
 
 const initialState = {
   categories: [],
@@ -33,7 +34,7 @@ const initialState = {
 
 function reducer(state, action) {
   switch (action.type) {
-    case 'dataRecieved':
+    case 'loading':
       return { ...state, categories: action.payload, status: 'ready' };
 
     case 'getName':
@@ -139,6 +140,9 @@ function reducer(state, action) {
     case 'error':
       return { ...state };
 
+    case 'resetQuiz':
+      return { ...initialState };
+
     default:
       throw new Error(
         'Could not caught the action! Please contact administrator of the website!'
@@ -166,34 +170,9 @@ function App() {
     dispatch,
   ] = useReducer(reducer, initialState);
 
-  useEffect(() => {
-    const controller = new AbortController();
-    async function getCategorie() {
-      try {
-        const res = await fetch(
-          `${process.env.REACT_APP_QUESTION_API}api_category.php`,
-          { String: controller.signal }
-        );
-        const data = await res.json();
-        dispatch({ type: 'dataRecieved', payload: data.trivia_categories });
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    getCategorie();
-
-    return function () {
-      controller.abort();
-    };
-  }, []);
-
   return (
     <ContainerApp>
-      {status === 'loading' && (
-        <>
-          <Header /> <Loader />
-        </>
-      )}
+      {status === 'loading' && <GetCategories dispatch={dispatch} />}
       {status === 'ready' && (
         <>
           <Header />
