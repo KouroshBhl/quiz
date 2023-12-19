@@ -1,4 +1,4 @@
-function SetupQuiz({ dispatch, categories }) {
+function SetupQuiz({ dispatch, categories, numOfQuestions }) {
   function handleSubmit(e) {
     e.preventDefault();
     dispatch({ type: 'startQuiz' });
@@ -8,11 +8,26 @@ function SetupQuiz({ dispatch, categories }) {
     <section className='setup-quiz'>
       <form action='submit' className='form-quiz' onSubmit={handleSubmit}>
         <div className='divide-quiz'>
+          <label htmlFor='name'>Your Name</label>
+          <input
+            type='text'
+            id='name'
+            defaultValue={'Zana Koljic'}
+            onChange={(e) =>
+              dispatch({
+                type: 'getName',
+                payload: e.target.value,
+              })
+            }
+          />
+        </div>
+
+        <div className='divide-quiz'>
           <label htmlFor='num-questions'>Number of questions</label>
           <input
             type='number'
             id='num-questions'
-            defaultValue={5}
+            defaultValue={numOfQuestions}
             onChange={(e) =>
               dispatch({
                 type: 'getQuestionNumbers',

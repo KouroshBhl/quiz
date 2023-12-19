@@ -15,7 +15,8 @@ function Question({
   incorrectAnswers,
   correctAnswers,
 }) {
-  console.log(numOfQuestions, index + 1);
+  const percentage = Math.floor((correctAnswers.length / numOfQuestions) * 100);
+
   return (
     <div>
       <SectionContainer>
@@ -47,7 +48,9 @@ function Question({
           {numOfQuestions === index + 1 && (
             <NextButton
               type={'FINISH'}
-              onClick={() => dispatch({ type: 'quizFinished' })}
+              onClick={() =>
+                dispatch({ type: 'quizFinished', payload: Number(percentage) })
+              }
             />
           )}
         </QuestionFooter>

@@ -8,7 +8,7 @@
   --color-theme-light: #22d3ee;
   --color-accent: #ffa94d;
   --color-progress: #22c55e;
-  --color-school-theme: #6d28d9;
+  --color-school-theme: #581c87;
 
   --color-correct: #16a34a
   --color-incorrect: #ef4444
@@ -63,6 +63,9 @@ label {
   font-size: 2.2rem;
   font-weight: 500;
   text-transform: uppercase;
+}
+hr{
+  margin-bottom: 1.4rem;
 }
 
 .header {
@@ -529,6 +532,7 @@ path.two {
   background-color: var(--color-school-theme);
   padding: 1.8rem;
   border-radius: 9px;
+  margin-bottom: 1.8rem;
 }
 
 .card-title{
@@ -537,6 +541,7 @@ path.two {
   color: var(--color-theme-light);
   font-weight: 600;
   text-align: center;
+  text-transform: capitalize;
 }
 .question-card{
   margin-bottom: 1.8rem;
@@ -544,4 +549,100 @@ path.two {
 .selected-wrong{
   color: #fda4af;
   font-weight: 700;
+}
+.selected-correct{
+  color: #4ade80;
+  font-weight: 700;
+}
+.no-correct{
+  text-align: center;
+  background-color: var(--color-darkest);
+  padding: 1.2rem;
+  border-radius: 13px;
+}
+.card-info{
+  display: flex;
+  gap: 1.8rem;
+}
+.card-info span{
+  background-color: var(--color-darkest);
+  margin-bottom: 1.4rem;
+  padding: 0.5rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  border-radius: 4px;
+}
+
+/* blockquote card colors */
+
+
+blockquote.q-card-color-2{
+  --accent-color: rgb(243 243 243);
+  --bg-color: rgb(33 29 30);
+  --dot-color: rgb(255 255 255 / .125);
+  --text-color: rgb(243 243 243);
+  --text-color-author: rgb(33 29 30);
+}
+/* blockquote card setup*/
+blockquote.q-card{
+  --padding: 1rem;
+  padding: var(--padding);
+  color: var(--text-color, black);
+  font-weight: 600;
+  background-color: var(--bg-color, white);
+  display: grid;
+  gap: 1rem;
+  background-image: radial-gradient( circle, var(--dot-color, rgb(0 0 0 / .125)) calc(25% - 1px), transparent 25% );
+  background-size: 0.5rem 0.5rem;
+  border-radius: 0.25rem;
+  box-shadow: 0.5rem 0.5rem 2rem rgb(0 0 0 / .5);
+  margin-bottom: 4.8rem;
+}
+blockquote.q-card::before{
+  --qHeight: 4rem;
+  content: "";
+  margin-left: calc(var(--padding) * -1);
+  margin-top: calc(var(--padding) * -1);
+  height: var(--qHeight);
+  width: calc(var(--qHeight) * 1.1);
+  background-image:
+    radial-gradient(
+      circle at bottom right,
+      transparent calc(var(--qHeight) / 4 - 1px),
+      var(--accent-color, black) calc(var(--qHeight) / 4) calc(var(--qHeight) / 2), 
+      transparent calc(var(--qHeight) / 2 + 1px)
+    ),
+    linear-gradient(var(--accent-color, black), var(--accent-color, black));
+  background-size: calc(var(--qHeight) / 2) calc(var(--qHeight) / 2);
+  background-position: top left, bottom left;
+  background-repeat: space no-repeat
+}
+
+blockquote.q-card > .author{
+  color: var(--text-color-author, white);
+  background-color: var(--accent-color, black);
+  justify-self: end;
+  font-size: 1.25em;  
+  padding: 0.5em 1em;
+  border-radius: 0.25rem;
+}
+blockquote.q-card > .author::before{
+  content: "- "
+}
+.content{
+  font-size: 2.4rem;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+.final-message{
+  font-family: 'Pacifico', sans-serif;
+  font-size: 3.2rem;
+  text-align: center;
+  margin-bottom: 1.4rem;
+  color: var(--color-theme-light);
+  font-weight: 600;
+}
+.percentage-message{
+  font-size: 2rem;
 }

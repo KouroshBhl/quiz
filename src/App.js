@@ -13,7 +13,8 @@ const initialState = {
   categories: [],
   // 'loading', 'error', 'ready', 'active', 'finished', preparing
   status: 'loading',
-  numOfQuestions: 5,
+  personName: 'Zana Koljic',
+  numOfQuestions: 2,
   categorySelectedID: null,
   difficultySelected: null,
   typeSelected: null,
@@ -25,12 +26,17 @@ const initialState = {
   hasAnswered: false,
   randomAnswers: [],
   allAnswers: [],
+  quote: {},
+  percentage: null,
 };
 
 function reducer(state, action) {
   switch (action.type) {
     case 'dataRecieved':
       return { ...state, categories: action.payload, status: 'ready' };
+
+    case 'getName':
+      return { ...state, personName: action.payload };
 
     case 'getQuestionNumbers':
       return { ...state, numOfQuestions: action.payload };
@@ -95,19 +101,6 @@ function reducer(state, action) {
         randomAnswers: random,
       };
 
-    // case 'randomizeAnswers':
-    //   console.log(action.payload);
-    //   let answers = [...action.payload[state.index].incorrect_answers];
-    //   const tempIndex = Math.floor(Math.random() * 4);
-    //   if (tempIndex === 3) {
-    //     answers.push(action.payload[state.index].correct_answer);
-    //   } else {
-    //     answers.push(answers[tempIndex]);
-    //     answers[tempIndex] = action.payload[state.index].correct_answer;
-    //   }
-
-    // return { ...state };
-
     case 'checkAnswer':
       if (state.questions[state.index].correct_answer === action.payload)
         return {
@@ -137,7 +130,10 @@ function reducer(state, action) {
       return { ...state, hasAnswered: false, index: state.index + 1 };
 
     case 'quizFinished':
-      return { ...state, status: 'finished' };
+      return { ...state, status: 'finished', percentage: action.payload };
+
+    case 'getQuote':
+      return { ...state, quote: action.payload[0] };
 
     default:
       throw new Error(
@@ -160,6 +156,8 @@ function App() {
       allAnswers,
       correctAnswers,
       incorrectAnswers,
+      quote,
+      percentage,
     },
     dispatch,
   ] = useReducer(reducer, initialState);
@@ -195,7 +193,11 @@ function App() {
       {status === 'ready' && (
         <>
           <Header />
-          <SetupQuiz dispatch={dispatch} categories={categories} />
+          <SetupQuiz
+            dispatch={dispatch}
+            categories={categories}
+            numOfQuestions={numOfQuestions}
+          />
         </>
       )}
 
@@ -225,6 +227,9 @@ function App() {
         <FinishScreen
           correctAnswers={correctAnswers}
           incorrectAnswers={incorrectAnswers}
+          quote={quote}
+          dispatch={dispatch}
+          percentage={percentage}
         />
       )}
     </ContainerApp>
