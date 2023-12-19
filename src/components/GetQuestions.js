@@ -12,10 +12,18 @@ function GetQuestions({ apiString, numOfQuestions, dispatch }) {
           }api.php?amount=${numOfQuestions}${apiString || ''}`,
           { signal: controller.signal }
         );
+        if (!res.ok) throw new Error('Could not connect to server!');
         const data = await res.json();
         dispatch({ type: 'questionsRecieved', payload: data.results });
       } catch (error) {
-        console.log(error.message);
+        if (error.name !== 'AbortError')
+          dispatch({
+            type: 'error',
+            payload: {
+              msg: 'Could not get questions list!',
+              error: error.message,
+            },
+          });
       }
     }
 

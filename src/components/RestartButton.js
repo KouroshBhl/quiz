@@ -1,4 +1,4 @@
-function RestartButton({ onClick }) {
+function RestartButton({ onClick, text }) {
   return (
     <div className='container-reset'>
       <div className='center'>
@@ -18,7 +18,7 @@ function RestartButton({ onClick }) {
               className='hl-line'
             />
           </svg>
-          <span>RESTART QUIZ!</span>
+          <span>{text}</span>
         </button>
       </div>
     </div>

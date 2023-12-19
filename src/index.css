@@ -36,12 +36,11 @@ body {
   min-height: 100vh;
   color: var(--color-light);
   background: linear-gradient(35deg, var(--color-darkest), var(--color-dark),  var(--color-darkest));
-  padding: 3.2rem;
 }
 .main {
   display: flex;
   flex-direction: column;
-  margin: 2rem 0;
+  margin: 4.8rem 0;
 }
 h1 {
   font-family: 'Rubik Scribble', sans-serif;
@@ -711,4 +710,22 @@ blockquote.q-card > .author::before{
 }
 .percentage-message{
   font-size: 2rem;
+}
+
+/* !Error */
+.error-section{
+  display: flex;
+  gap: 2.4rem;
+  align-items: center;
+  background-color: #9f1239;
+  padding: 3.2rem;
+  margin-top: 4.8rem;
+  border-radius: 13px;
+}
+.error-section svg{
+  width: 6rem;
+  height: 6rem;
+}
+.error-messages h2{
+  margin-bottom: 1.8rem;
 }

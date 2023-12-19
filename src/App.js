@@ -1,14 +1,14 @@
-import { useEffect, useReducer } from 'react';
+import { useReducer } from 'react';
 import {
   Header,
   ContainerApp,
   SetupQuiz,
   Question,
-  Loader,
+  Error,
+  GetQuestions,
+  FinishScreen,
+  GetCategories,
 } from './components';
-import GetQuestions from './components/GetQuestions';
-import FinishScreen from './components/FinishScreen';
-import GetCategories from './components/GetCategories';
 
 const initialState = {
   categories: [],
@@ -29,7 +29,8 @@ const initialState = {
   allAnswers: [],
   quote: {},
   percentage: null,
-  error: '',
+  error: {},
+  isQuoteError: false,
 };
 
 function reducer(state, action) {
@@ -138,7 +139,14 @@ function reducer(state, action) {
       return { ...state, quote: action.payload[0] };
 
     case 'error':
-      return { ...state };
+      return {
+        ...state,
+        status: 'error',
+        error: { msg: action.payload.msg, error: action.payload.error },
+      };
+
+    case 'quoteError':
+      return { ...state, isQuoteError: true };
 
     case 'resetQuiz':
       return { ...initialState };
@@ -166,6 +174,8 @@ function App() {
       incorrectAnswers,
       quote,
       percentage,
+      error,
+      isQuoteError,
     },
     dispatch,
   ] = useReducer(reducer, initialState);
@@ -173,6 +183,7 @@ function App() {
   return (
     <ContainerApp>
       {status === 'loading' && <GetCategories dispatch={dispatch} />}
+
       {status === 'ready' && (
         <>
           <Header />
@@ -213,8 +224,10 @@ function App() {
           quote={quote}
           dispatch={dispatch}
           percentage={percentage}
+          isQuoteError={isQuoteError}
         />
       )}
+      {status === 'error' && <Error error={error} dispatch={dispatch} />}
     </ContainerApp>
   );
 }

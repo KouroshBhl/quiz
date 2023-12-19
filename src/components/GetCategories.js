@@ -9,19 +9,23 @@ function GetCategories({ dispatch }) {
       try {
         const res = await fetch(
           `${process.env.REACT_APP_QUESTION_API}api_category.php`,
-          { String: controller.signal }
+          { signal: controller.signal }
         );
+        if (!res.ok) throw new Error('Could not connect to server!');
         const data = await res.json();
         dispatch({ type: 'loading', payload: data.trivia_categories });
       } catch (error) {
-        console.log(error);
+        if (error.name !== 'AbortError')
+          dispatch({
+            type: 'error',
+            payload: {
+              msg: 'Could not get categories list!',
+              error: error.message,
+            },
+          });
       }
     }
     getCategorie();
-
-    return function () {
-      controller.abort();
-    };
   }, [dispatch]);
 
   return (

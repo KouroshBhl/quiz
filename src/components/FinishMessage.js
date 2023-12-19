@@ -4,7 +4,7 @@ function FinishMessage({ percentage }) {
   let message, classOption;
   if (percentage === 100) {
     classOption = '#86efac';
-    message = `Congratulations! You answered all questions correctly ${percentage}%}🥇`;
+    message = `Congratulations! You answered all questions correctly ${percentage}%🥇`;
   }
   if (percentage >= 70 && percentage < 100) {
     classOption = '#86efac';
