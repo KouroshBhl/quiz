@@ -73,6 +73,7 @@ hr{
   justify-content: center;
   align-items: center;
   gap: 3.2rem;
+  margin-bottom: 3.2rem;
 }
 
 .logo {
@@ -95,6 +96,7 @@ hr{
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative;
 }
 
 
@@ -253,14 +255,15 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-#num-questions {
+/* #num-questions {
   background: var(--color-darkest);
   cursor: auto;
-}
+} */
 /* <select> styles */
 select,
 input {
   /* Reset */
+  position: relative;
   appearance: none;
   border: 0;
   outline: 0;
@@ -268,13 +271,11 @@ input {
   font-size: 2rem;
   /* Personalize */
   width: 40%;
-  padding: 1rem 4rem 1rem 1rem;
-  background: var(--arrow-icon) no-repeat right 0.8em center / 1.4em,
-    linear-gradient(to left, var(--arrow-bg) 3em, var(--select-bg) 3em);
+  padding: 1rem 4rem 1rem 2rem;
+  background: linear-gradient(to left, var(--arrow-bg) 3em, var(--select-bg) 3em);
   color: white;
   border-radius: 0.25em;
   box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
-  cursor: pointer;
   /* Remove IE arrow */
   input::-ms-expand {
     display: none;
@@ -288,6 +289,20 @@ input {
     color: inherit;
     background-color: var(--option-bg);
   }
+}
+
+.arrow-label::after{
+  content: "";
+  width: 2.4rem;
+  height: 2.4rem;
+  position: absolute;
+  top: 25;
+  right: 0;
+  color: white;
+  display: inline-block;
+  background: var(--arrow-icon);
+  margin-right: 1rem;
+  opacity: 80%;
 }
 
 

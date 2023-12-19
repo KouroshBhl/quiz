@@ -28,6 +28,7 @@ const initialState = {
   allAnswers: [],
   quote: {},
   percentage: null,
+  error: '',
 };
 
 function reducer(state, action) {
@@ -134,6 +135,9 @@ function reducer(state, action) {
 
     case 'getQuote':
       return { ...state, quote: action.payload[0] };
+
+    case 'error':
+      return { ...state };
 
     default:
       throw new Error(

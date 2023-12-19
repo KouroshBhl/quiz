@@ -37,7 +37,9 @@ function SetupQuiz({ dispatch, categories, numOfQuestions }) {
           />
         </div>
         <div className='divide-quiz'>
-          <label htmlFor='category'>Select category</label>
+          <label className='arrow-label' htmlFor='category'>
+            Select category
+          </label>
           <select
             name='category'
             id='category'
@@ -60,7 +62,9 @@ function SetupQuiz({ dispatch, categories, numOfQuestions }) {
         </div>
 
         <div className='divide-quiz'>
-          <label htmlFor='difficulty'>Select Difficulty</label>
+          <label className='arrow-label' htmlFor='difficulty'>
+            Select Difficulty
+          </label>
           <select
             name='difficulty'
             id='difficulty'
@@ -78,7 +82,9 @@ function SetupQuiz({ dispatch, categories, numOfQuestions }) {
           </select>
         </div>
         <div className='divide-quiz'>
-          <label htmlFor='category'>Select type</label>
+          <label className='arrow-label' htmlFor='category'>
+            Select type
+          </label>
           <select
             name='type'
             id='type'
