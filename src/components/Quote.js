@@ -17,9 +17,8 @@ function Quote({ quote, dispatch }) {
           { signal: controller.signal }
         );
         if (!res.ok) throw new Error('Could not get quote!');
-        console.log(res);
         const data = await res.json();
-        console.log(data);
+        if (data.length === 0) throw new Error('Could not get quote!');
         dispatch({ type: 'getQuote', payload: data });
       } catch (error) {
         dispatch({

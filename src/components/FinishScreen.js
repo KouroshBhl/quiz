@@ -13,12 +13,11 @@ function FinishScreen({
   isQuoteError,
   text,
 }) {
-  console.log(correctAnswers, incorrectAnswers);
   const wrongPercentage = 100 - percentage;
   return (
     <div>
       <FinishMessage percentage={percentage} />
-      {/* {!isQuoteError && <Quote quote={quote} dispatch={dispatch} />} */}
+      {!isQuoteError && <Quote quote={quote} dispatch={dispatch} />}
       <SectionContainer>
         {correctAnswers.length > 0 && (
           <div>

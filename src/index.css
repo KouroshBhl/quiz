@@ -805,3 +805,6 @@ blockquote.q-card > .author::before{
   text-align: center;
   font-size: 1.8rem;
 }
+.version{
+  font-size: 1.4rem;
+}

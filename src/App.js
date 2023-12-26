@@ -37,7 +37,7 @@ const initialState = {
   isQuoteError: false,
   localStorage: [],
   text: '',
-  getTime: moment().format('MMMM Do YYYY, h:mm:ss a'),
+  getTime: '',
 };
 
 function reducer(state, action) {
@@ -54,7 +54,18 @@ function reducer(state, action) {
     case 'quizFinished':
       const storageArray = [...state.localStorage, state];
 
-      localStorage.setItem('quiz', JSON.stringify(storageArray));
+      try {
+        localStorage.setItem('quiz', JSON.stringify(storageArray));
+      } catch (error) {
+        return {
+          ...state,
+          status: 'error',
+          error: {
+            msg: 'Quiz History is full, please clear it!',
+          },
+        };
+      }
+
       return { ...state, status: 'finished', text: 'Restart Quiz!' };
 
     case 'getName':
@@ -86,7 +97,12 @@ function reducer(state, action) {
           ? api + `&type=${state.typeSelected}`
           : `&type=${state.typeSelected}`;
 
-      return { ...state, status: 'preparing', apiString: api };
+      return {
+        ...state,
+        status: 'preparing',
+        apiString: api,
+        getTime: moment().format('MMMM Do YYYY, h:mm:ss a'),
+      };
 
     case 'questionsRecieved':
       const alls = action.payload.map((question) => {
@@ -260,15 +276,19 @@ function App() {
       )}
 
       {status === 'finished' && (
-        <FinishScreen
-          correctAnswers={correctAnswers}
-          incorrectAnswers={incorrectAnswers}
-          quote={quote}
-          dispatch={dispatch}
-          percentage={percentage}
-          isQuoteError={isQuoteError}
-          text={text}
-        />
+        <>
+          <FinishScreen
+            correctAnswers={correctAnswers}
+            incorrectAnswers={incorrectAnswers}
+            quote={quote}
+            dispatch={dispatch}
+            percentage={percentage}
+            isQuoteError={isQuoteError}
+            text={text}
+          />
+
+          <Footer />
+        </>
       )}
       {status === 'error' && <Error error={error} dispatch={dispatch} />}
     </ContainerApp>

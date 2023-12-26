@@ -5,7 +5,7 @@ function PreviousQuiz({ localStorage, dispatch }) {
   return (
     <SectionContainer>
       <div className='history-header'>
-        <h2>Quiz History</h2>
+        <h2>Quiz History ({localStorage.length})</h2>
         <button
           className='btn-remove-all'
           onClick={() => dispatch({ type: 'clearAllHistory' })}
