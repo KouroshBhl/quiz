@@ -11,12 +11,14 @@ function FinishScreen({
   dispatch,
   percentage,
   isQuoteError,
+  text,
 }) {
+  console.log(correctAnswers, incorrectAnswers);
   const wrongPercentage = 100 - percentage;
   return (
     <div>
       <FinishMessage percentage={percentage} />
-      {!isQuoteError && <Quote quote={quote} dispatch={dispatch} />}
+      {/* {!isQuoteError && <Quote quote={quote} dispatch={dispatch} />} */}
       <SectionContainer>
         {correctAnswers.length > 0 && (
           <div>
@@ -52,7 +54,7 @@ function FinishScreen({
         </div>
         <RestartButton
           onClick={() => dispatch({ type: 'resetQuiz' })}
-          text={'RESTART QUIZ!'}
+          text={text}
         />
       </SectionContainer>
     </div>

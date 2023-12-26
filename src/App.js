@@ -1,4 +1,5 @@
 import { useReducer } from 'react';
+import moment from 'moment';
 import {
   Header,
   ContainerApp,
@@ -8,6 +9,8 @@ import {
   GetQuestions,
   FinishScreen,
   GetCategories,
+  PreviousQuiz,
+  MainContainerApp,
 } from './components';
 
 const initialState = {
@@ -31,12 +34,27 @@ const initialState = {
   percentage: null,
   error: {},
   isQuoteError: false,
+  localStorage: [],
+  text: '',
+  getTime: moment().format('MMMM Do YYYY, h:mm:ss a'),
 };
 
 function reducer(state, action) {
   switch (action.type) {
     case 'loading':
-      return { ...state, categories: action.payload, status: 'ready' };
+      const quiz = localStorage.getItem('quiz');
+      return {
+        ...state,
+        categories: action.payload,
+        status: 'ready',
+        localStorage: JSON.parse(quiz) || [],
+      };
+
+    case 'quizFinished':
+      const storageArray = [...state.localStorage, state];
+
+      localStorage.setItem('quiz', JSON.stringify(storageArray));
+      return { ...state, status: 'finished', text: 'Restart Quiz!' };
 
     case 'getName':
       return { ...state, personName: action.payload };
@@ -132,11 +150,11 @@ function reducer(state, action) {
     case 'nextQuestion':
       return { ...state, hasAnswered: false, index: state.index + 1 };
 
-    case 'quizFinished':
-      return { ...state, status: 'finished', percentage: action.payload };
-
     case 'getQuote':
       return { ...state, quote: action.payload[0] };
+
+    case 'setPercentage':
+      return { ...state, percentage: action.payload };
 
     case 'error':
       return {
@@ -150,6 +168,17 @@ function reducer(state, action) {
 
     case 'resetQuiz':
       return { ...initialState };
+
+    case 'reviewQuiz':
+      console.log(action.payload);
+      return {
+        ...state,
+        correctAnswers: action.payload.correctAnswers,
+        incorrectAnswers: action.payload.incorrectAnswers,
+        percentage: action.payload.percentage,
+        status: 'finished',
+        text: 'Go Back',
+      };
 
     default:
       throw new Error(
@@ -176,6 +205,9 @@ function App() {
       percentage,
       error,
       isQuoteError,
+      localStorage,
+      text,
+      getTime,
     },
     dispatch,
   ] = useReducer(reducer, initialState);
@@ -185,14 +217,18 @@ function App() {
       {status === 'loading' && <GetCategories dispatch={dispatch} />}
 
       {status === 'ready' && (
-        <>
+        <MainContainerApp>
           <Header />
           <SetupQuiz
             dispatch={dispatch}
             categories={categories}
             numOfQuestions={numOfQuestions}
+            localStorage={localStorage}
           />
-        </>
+          {localStorage.length > 0 && (
+            <PreviousQuiz localStorage={localStorage} dispatch={dispatch} />
+          )}
+        </MainContainerApp>
       )}
 
       {status === 'preparing' && (
@@ -225,6 +261,7 @@ function App() {
           dispatch={dispatch}
           percentage={percentage}
           isQuoteError={isQuoteError}
+          text={text}
         />
       )}
       {status === 'error' && <Error error={error} dispatch={dispatch} />}

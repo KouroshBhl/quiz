@@ -17,6 +17,11 @@ function Question({
 }) {
   const percentage = Math.floor((correctAnswers.length / numOfQuestions) * 100);
 
+  function handleFinishQuiz() {
+    dispatch({ type: 'setPercentage', payload: Number(percentage) });
+    dispatch({ type: 'quizFinished' });
+  }
+
   return (
     <div>
       <SectionContainer>
@@ -38,7 +43,8 @@ function Question({
         />
 
         <QuestionFooter>
-          <Timer />
+          {/* <Timer /> */}
+          <div></div>
           {hasAnswered && index + 1 < numOfQuestions && (
             <NextButton
               onClick={() => dispatch({ type: 'nextQuestion' })}
@@ -46,12 +52,7 @@ function Question({
             />
           )}
           {numOfQuestions === index + 1 && (
-            <NextButton
-              type={'FINISH'}
-              onClick={() =>
-                dispatch({ type: 'quizFinished', payload: Number(percentage) })
-              }
-            />
+            <NextButton type={'FINISH'} onClick={handleFinishQuiz} />
           )}
         </QuestionFooter>
       </SectionContainer>

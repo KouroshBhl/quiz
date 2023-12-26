@@ -1,10 +1,12 @@
 import Logo from './Logo';
 
 function Header() {
+  const array = {};
+
   return (
     <header className='header'>
       <Logo />
-      <h1>Let's challenge yourself!</h1>
+      <h1>challenge yourself!</h1>
     </header>
   );
 }

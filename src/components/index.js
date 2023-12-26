@@ -7,6 +7,8 @@ import Error from './Error';
 import GetQuestions from './GetQuestions';
 import FinishScreen from './FinishScreen';
 import GetCategories from './GetCategories';
+import PreviousQuiz from './PreviousQuiz';
+import MainContainerApp from './MainContainerApp';
 
 export {
   Header,
@@ -18,4 +20,6 @@ export {
   GetQuestions,
   GetCategories,
   FinishScreen,
+  PreviousQuiz,
+  MainContainerApp,
 };

@@ -1,4 +1,4 @@
-function SetupQuiz({ dispatch, categories, numOfQuestions }) {
+function SetupQuiz({ dispatch, categories, numOfQuestions, localStorage }) {
   function handleSubmit(e) {
     e.preventDefault();
     dispatch({ type: 'startQuiz' });
