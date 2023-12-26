@@ -68,7 +68,10 @@ label {
 hr{
   margin-bottom: 1.4rem;
 }
-
+option{
+  background-color: var(--color-dark);
+  color: #fff;
+}
 .header {
   display: flex;
   justify-content: center;
