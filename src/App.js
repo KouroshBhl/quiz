@@ -180,6 +180,10 @@ function reducer(state, action) {
         text: 'Go Back',
       };
 
+    case 'clearAllHistory':
+      localStorage.clear();
+      return { ...state, localStorage: [] };
+
     default:
       throw new Error(
         'Could not caught the action! Please contact administrator of the website!'

@@ -10,12 +10,14 @@ function HistoryQuiz({ quiz, dispatch }) {
       <p className='Success'>
         Success rate: <strong>{percentage}%</strong>
       </p>
-      <button
-        className='review'
-        onClick={() => dispatch({ type: 'reviewQuiz', payload: quiz })}
-      >
-        Review
-      </button>
+      <div className='btn-review'>
+        <button
+          className='review'
+          onClick={() => dispatch({ type: 'reviewQuiz', payload: quiz })}
+        >
+          Review
+        </button>
+      </div>
       <span className='time'>{getTime}</span>
     </div>
   );

@@ -4,8 +4,15 @@ import HistoryQuiz from './HistoryQuiz';
 function PreviousQuiz({ localStorage, dispatch }) {
   return (
     <SectionContainer>
-      <h2>Quiz History</h2>
-
+      <div className='history-header'>
+        <h2>Quiz History</h2>
+        <button
+          className='btn-remove-all'
+          onClick={() => dispatch({ type: 'clearAllHistory' })}
+        >
+          Clear All
+        </button>
+      </div>
       <div className='history-container'>
         {localStorage.map((quiz) => {
           return (
