@@ -2,8 +2,8 @@ import Options from './Options';
 import SectionContainer from './SectionContainer';
 import NextButton from './NextButton';
 import QuestionFooter from './QuestionFooter';
-import Timer from './Timer';
 import Progress from './Progress';
+import Footer from './Footer';
 
 function Question({
   numOfQuestions,

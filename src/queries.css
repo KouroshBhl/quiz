@@ -53,6 +53,9 @@
   .divide-quiz select {
     font-size: 1.8rem;
   }
+  .footer {
+    margin-top: 0;
+  }
 }
 
 /* ?480px */
@@ -99,5 +102,10 @@
   }
   .final-message {
     font-size: 2.4rem;
+  }
+
+  .footer-text {
+    text-align: center;
+    font-size: 1.2rem;
   }
 }

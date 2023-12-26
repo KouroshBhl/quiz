@@ -11,6 +11,7 @@ import {
   GetCategories,
   PreviousQuiz,
   MainContainerApp,
+  Footer,
 } from './components';
 
 const initialState = {
@@ -232,6 +233,7 @@ function App() {
           {localStorage.length > 0 && (
             <PreviousQuiz localStorage={localStorage} dispatch={dispatch} />
           )}
+          <Footer />
         </MainContainerApp>
       )}
 

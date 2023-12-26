@@ -9,6 +9,7 @@ import FinishScreen from './FinishScreen';
 import GetCategories from './GetCategories';
 import PreviousQuiz from './PreviousQuiz';
 import MainContainerApp from './MainContainerApp';
+import Footer from './Footer';
 
 export {
   Header,
@@ -22,4 +23,5 @@ export {
   FinishScreen,
   PreviousQuiz,
   MainContainerApp,
+  Footer,
 };
