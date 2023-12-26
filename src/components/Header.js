@@ -1,8 +1,6 @@
 import Logo from './Logo';
 
 function Header() {
-  const array = {};
-
   return (
     <header className='header'>
       <Logo />
